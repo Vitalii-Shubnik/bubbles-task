@@ -55,7 +55,7 @@ const bubbles = [
 ];
 
 
-function ListItem({ item, parrentId }) {
+function Bubble({ item }) {
   const [showChildren, setShowChildren] = useState(false);
   let children = null;
   if (item?.bubbles?.length && showChildren) {
@@ -63,7 +63,7 @@ function ListItem({ item, parrentId }) {
       <div className="bubbles">
         {item.bubbles.map(i => {
           const populatedItem = bubbles.find(b => b.id === i);
-          return <ListItem item={populatedItem} key={populatedItem.id + Math.random() * 21300} />;
+          return <Bubble item={populatedItem} key={populatedItem.id + Math.random() * 21300} />;
         })}
       </div>
     );
@@ -92,16 +92,14 @@ function ListItem({ item, parrentId }) {
   
   return (
     <Draggable onMouseDown={e => e.stopPropagation()}>
-      <div className="bubble">
-        <div className='child-bubble' onClick={toggleShowChildren}
-          onWheel={(e) => createNewBubble(e, item.id)}
-          onDoubleClick={(e) => copyPasteBubble(e)}
-
+      <div className="bubble" >
+        <div className='child-bubble' 
+          onDoubleClick={(e) => createNewBubble(e, item.id)}
         >
-
           <h3>{item.name}</h3>
           {children}
           <button className='copy-paste' onClick={copyPasteBubble}>Copy</button>
+          <button className='show-children' onClick={toggleShowChildren}>{showChildren ? 'Hide': 'Show'} children</button>
         </div>
       </div>
     </Draggable>
@@ -112,7 +110,7 @@ function App() {
   return (
     <div className="bubbles" >
       {bubbles.filter(b => b.root).map(i => (
-        <ListItem item={i} key={i.id} />
+        <Bubble item={i} key={i.id} />
       ))}
     </div>
   );

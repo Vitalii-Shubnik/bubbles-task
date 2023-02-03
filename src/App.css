@@ -1,9 +1,17 @@
 .bubble {
+  padding: 10px;
+  margin-bottom: 30px;
   width: fit-content;
   position: relative;
+  border: 1px solid gray;
 }
 .copy-paste {
   position: absolute;
   top: 0;
-  right: -50px;
+  right: 0;
+}
+.show-children{
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
